@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,19 +17,25 @@ export default function Home({ data }: getServerSideHomeProps) {
       </Head>
       <header>
         <nav>
-          <img />
-          <a href="/">Home</a>
-          <a href="/events">Events</a>
-          <a href="/about-us">About Us</a>
+          <Link href="/" passHref>
+            Home
+          </Link>
+
+          <Link href="/events" passHref>
+            Events
+          </Link>
+          <Link href="/about-us" passHref>
+            About Us
+          </Link>
         </nav>
       </header>
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
         {data.map((ev: any) => (
-          <a key={ev.id} href={`/events/${ev.id}`}>
+          <Link key={ev.id} href={`/events/${ev.id}`} passHref>
             <Image src={ev.image} alt={ev.title} width={200} height={100} />
             <h2>{ev.title}</h2>
             <p>{ev.description}</p>
-          </a>
+          </Link>
         ))}
 
         <a href="/events/london">
