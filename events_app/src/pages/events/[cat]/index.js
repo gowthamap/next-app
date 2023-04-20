@@ -34,7 +34,6 @@ export async function getStaticPaths() {
     };
   });
 
-  console.log(allPaths);
   return {
     paths: allPaths,
     fallback: false,
@@ -42,12 +41,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  console.log(context);
   const id = context?.params.cat;
   const { allEvents } = await import("../../../data/data.json");
 
   const data = allEvents.filter((ev) => ev.city === id);
-  console.log(data);
 
   return { props: { data, pageName: id } };
 }
